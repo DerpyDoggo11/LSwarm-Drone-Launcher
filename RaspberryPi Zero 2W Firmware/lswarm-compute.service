@@ -1,0 +1,16 @@
+# systemd unit for the LSwarm central-compute firmware.
+# Install:  sudo cp .pio/build/pizero/program /usr/local/bin/lswarm-compute
+#           sudo cp lswarm-compute.service /etc/systemd/system/
+#           sudo systemctl enable --now lswarm-compute
+[Unit]
+Description=LSwarm Drone Launcher central compute (ESP32 link)
+After=multi-user.target
+
+[Service]
+ExecStart=/usr/local/bin/lswarm-compute /dev/ttyACM0 115200
+Restart=always
+RestartSec=2
+User=pi
+
+[Install]
+WantedBy=multi-user.target
